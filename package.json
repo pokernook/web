@@ -3,6 +3,7 @@
   "description": "PokerNook Next.js app",
   "repository": "github:pokernook/next",
   "scripts": {
+    "generate:graphql": "graphql-codegen",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ext .js,.ts",
     "dev": "next dev",
