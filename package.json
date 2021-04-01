@@ -19,7 +19,6 @@
     "@chakra-ui/theme-tools": "^1.1.2",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
-    "@theme-ui/color": "^0.6.0",
     "@urql/devtools": "^2.0.3",
     "@urql/exchange-graphcache": "^4.0.0",
     "date-fns": "^2.19.0",
@@ -37,7 +36,6 @@
     "react-is": "^17.0.0",
     "react-router-dom": "^5.2.0",
     "seedrandom": "^3.0.5",
-    "theme-ui": "^0.6.0",
     "urql": "^2.0.1"
   },
   "devDependencies": {
