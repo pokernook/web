@@ -1,7 +1,7 @@
 {
   "name": "pokernook",
   "description": "PokerNook Next.js app",
-  "repository": "github:pokernook/next",
+  "repository": "github:pokernook/web",
   "engines": {
     "node": "15.x"
   },
