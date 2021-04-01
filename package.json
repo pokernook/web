@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^1.4.2",
+    "@chakra-ui/theme-tools": "^1.1.2",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
     "@theme-ui/color": "^0.6.0",
@@ -35,7 +36,6 @@
     "react-icons": "^4.2.0",
     "react-is": "^17.0.0",
     "react-router-dom": "^5.2.0",
-    "react-toast-notifications": "^2.4.3",
     "seedrandom": "^3.0.5",
     "theme-ui": "^0.6.0",
     "urql": "^2.0.1"
