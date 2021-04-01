@@ -2,6 +2,9 @@
   "name": "pokernook",
   "description": "PokerNook Next.js app",
   "repository": "github:pokernook/next",
+  "engines": {
+    "node": "15.x"
+  },
   "scripts": {
     "generate:graphql": "graphql-codegen --require dotenv/config",
     "watch:graphql": "npm run generate:graphql -- --watch",
