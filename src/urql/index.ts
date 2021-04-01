@@ -14,5 +14,5 @@ export const getClientConfig: NextUrqlClientConfig = (ssrExchange) => ({
     fetchExchange,
   ],
   fetchOptions: { credentials: "include" },
-  url: "/graphql",
+  url: "/api/graphql",
 });
