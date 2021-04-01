@@ -9,7 +9,7 @@
     "lint": "eslint . --ext .js,.ts",
     "dev": "concurrently --kill-others \"next dev\" npm:watch:*",
     "build": "next build",
-    "start": "next start"
+    "start": "next start -p 8080"
   },
   "dependencies": {
     "@theme-ui/color": "^0.6.0",
