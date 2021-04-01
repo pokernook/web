@@ -3,10 +3,11 @@
   "description": "PokerNook Next.js app",
   "repository": "github:pokernook/next",
   "scripts": {
-    "generate:graphql": "graphql-codegen",
+    "generate:graphql": "graphql-codegen --require dotenv/config",
+    "watch:graphql": "npm run generate:graphql -- --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ext .js,.ts",
-    "dev": "next dev",
+    "dev": "concurrently --kill-others \"next dev\" npm:watch:*",
     "build": "next build",
     "start": "next start"
   },
@@ -47,6 +48,7 @@
     "@types/seedrandom": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
+    "concurrently": "^6.0.0",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
