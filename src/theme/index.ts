@@ -1,7 +1,4 @@
-import { alpha } from "@theme-ui/color";
-import { Theme } from "theme-ui";
-
-export const theme: Theme = {
+export const theme = {
   colors: {
     background: "#fff",
     text: "#24292e",
@@ -83,7 +80,7 @@ export const theme: Theme = {
       p: 2,
       ":hover,:focus": {
         color: "text",
-        bg: alpha("secondary", 0.15),
+        // bg: alpha("secondary", 0.15),
         cursor: "pointer",
       },
       "&.active": {
@@ -178,11 +175,11 @@ export const theme: Theme = {
     close: {
       color: "text",
       ":hover": {
-        bg: alpha("border", 0.4),
+        // bg: alpha("border", 0.4),
         cursor: "pointer",
       },
       ":active": {
-        bg: alpha("border", 0.7),
+        // bg: alpha("border", 0.7),
       },
     },
   },
