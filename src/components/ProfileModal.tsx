@@ -85,7 +85,12 @@ export const ProfileModal: FC<Props> = ({ onClose, ...props }: Props) => {
 
               <Box>
                 <FormLabel>Profile photo</FormLabel>
-                <Avatar src={avatarSrc} boxSize={160} bg="black" mb={3} />
+                <Avatar
+                  src={croppedImageUrl || avatarSrc}
+                  boxSize={160}
+                  bg="black"
+                  mb={3}
+                />
                 <Button
                   isFullWidth
                   onClick={openImageUpload}
