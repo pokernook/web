@@ -56,7 +56,7 @@ const SignUp: FC = () => {
             colorScheme="gray"
             type="submit"
             isLoading={signUpResult.fetching}
-            minWidth="70%"
+            isFullWidth
           >
             Sign up for PokerNook
           </Button>

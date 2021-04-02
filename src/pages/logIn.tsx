@@ -47,7 +47,7 @@ const LogIn: FC = () => {
             colorScheme="gray"
             type="submit"
             isLoading={logInResult.fetching}
-            minWidth="70%"
+            isFullWidth
           >
             Log in to PokerNook
           </Button>
