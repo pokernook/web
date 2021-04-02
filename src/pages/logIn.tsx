@@ -30,11 +30,7 @@ const LogIn: FC = () => {
         <Box as="form" onSubmit={onSubmit}>
           <FormControl mb={2}>
             <FormLabel>Email</FormLabel>
-            <Input
-              autoFocus
-              type="email"
-              {...register("email", { required: true })}
-            />
+            <Input type="email" {...register("email", { required: true })} />
           </FormControl>
 
           <FormControl mb={3}>
