@@ -18,6 +18,7 @@ import { useLogOutMutation, useStatusClearMutation } from "../graphql";
 import { useAvatarSrc } from "../hooks/use-avatar-src";
 import { useUser } from "../hooks/use-user";
 import { ProfileModal } from "./ProfileModal";
+import { SettingsModal } from "./SettingsModal";
 import { StatusModal } from "./StatusModal";
 
 export const UserNavMenu: FC = () => {
@@ -31,6 +32,11 @@ export const UserNavMenu: FC = () => {
     isOpen: isProfileOpen,
     onOpen: onProfileOpen,
     onClose: onProfileClose,
+  } = useDisclosure();
+  const {
+    isOpen: isSettingsOpen,
+    onOpen: onSettingsOpen,
+    onClose: onSettingsClose,
   } = useDisclosure();
   const [, clearStatus] = useStatusClearMutation();
   const [, logOut] = useLogOutMutation();
@@ -82,7 +88,9 @@ export const UserNavMenu: FC = () => {
 
           <MenuItem onClick={onProfileOpen}>Edit profile</MenuItem>
           <MenuItem>View profile</MenuItem>
-          <MenuItem icon={<SettingsIcon />}>Settings</MenuItem>
+          <MenuItem onClick={onSettingsOpen} icon={<SettingsIcon />}>
+            Settings
+          </MenuItem>
 
           <MenuDivider />
 
@@ -95,6 +103,9 @@ export const UserNavMenu: FC = () => {
       )}
       {isProfileOpen && (
         <ProfileModal onClose={onProfileClose} isOpen={isProfileOpen} />
+      )}
+      {isSettingsOpen && (
+        <SettingsModal onClose={onSettingsClose} isOpen={isSettingsOpen} />
       )}
     </>
   );
