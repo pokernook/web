@@ -1,37 +1,14 @@
+import { Avatar, Box, Flex, Heading, IconButton, Text } from "@chakra-ui/react";
 import { formatDistanceToNow } from "date-fns";
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 import { FiCheck, FiMoreVertical, FiX } from "react-icons/fi";
-import { Avatar, Box, Flex, Heading, IconButton, Text } from "theme-ui";
 
+import { Card } from "../components/Card";
 import {
   FriendRequestFieldsFragment,
   UserFieldsFragment,
 } from "../graphql/types";
 import { useAvatarSrc } from "../hooks/use-avatar-src";
-
-type FlexContainerProps = {
-  children: ReactNode;
-};
-
-const FlexContainer: FC<FlexContainerProps> = ({
-  children,
-}: FlexContainerProps) => (
-  <Flex
-    sx={{
-      p: 3,
-      bg: "background",
-      border: "solid",
-      borderColor: "border",
-      borderWidth: 2,
-      borderRadius: 4,
-      ":hover": {
-        bg: "muted",
-      },
-    }}
-  >
-    {children}
-  </Flex>
-);
 
 type FriendProps = {
   friend: UserFieldsFragment;
@@ -39,29 +16,22 @@ type FriendProps = {
 
 export const Friend: FC<FriendProps> = ({ friend }: FriendProps) => (
   <>
-    <FlexContainer>
-      <Avatar
-        src={useAvatarSrc(friend)}
-        sx={{ width: 48, height: 48, mr: 3 }}
-      />
+    <Card>
+      <Avatar src={useAvatarSrc(friend)} size="md" mr={3} />
       <Box>
         <Flex mb={2}>
-          <Heading as="h3">{friend.username}</Heading>
-          <Heading as="h3" sx={{ color: "textMuted" }}>
-            {friend.discriminator}
-          </Heading>
+          <Heading>{friend.username}</Heading>
+          <Heading color="GrayText">{friend.discriminator}</Heading>
         </Flex>
 
         {friend.status &&
           `${friend.status.emoji || ""} ${friend.status.message || ""}`}
       </Box>
 
-      <Flex sx={{ alignItems: "center", justifyContent: "flex-end", flex: 1 }}>
-        <IconButton variant="close">
-          <FiMoreVertical size={24} />
-        </IconButton>
+      <Flex alignItems="center" justifyContent="flex-end" flex={1}>
+        <IconButton aria-label="More options" icon={<FiMoreVertical />} />
       </Flex>
-    </FlexContainer>
+    </Card>
   </>
 );
 
@@ -80,16 +50,13 @@ export const FriendRequestSent: FC<SentProps> = ({
 
   return (
     <>
-      <FlexContainer>
-        <Avatar
-          src={useAvatarSrc(friendRequest.to)}
-          sx={{ width: 48, height: 48, mr: 3 }}
-        />
+      <Card>
+        <Avatar src={useAvatarSrc(friendRequest.to)} size="md" mr={3} />
 
         <Box>
           <Flex mb={2}>
-            <Heading as="h3">{friendRequest.to?.username}</Heading>
-            <Heading as="h3" sx={{ color: "textMuted" }}>
+            <Heading>{friendRequest.to?.username}</Heading>
+            <Heading color="GrayText">
               {friendRequest.to?.discriminator}
             </Heading>
           </Flex>
@@ -100,15 +67,15 @@ export const FriendRequestSent: FC<SentProps> = ({
             }`}
         </Box>
 
-        <Flex
-          sx={{ alignItems: "center", justifyContent: "flex-end", flex: 1 }}
-        >
+        <Flex alignItems="center" justifyContent="flex-end" flex={1}>
           <Text mr={3}>Sent {sentAt}</Text>
-          <IconButton variant="close" onClick={onCancel}>
-            <FiX size={24} />
-          </IconButton>
+          <IconButton
+            aria-label="Cancel friend request"
+            icon={<FiX />}
+            onClick={onCancel}
+          />
         </Flex>
-      </FlexContainer>
+      </Card>
     </>
   );
 };
@@ -130,16 +97,13 @@ export const FriendRequestReceived: FC<ReceivedProps> = ({
 
   return (
     <>
-      <FlexContainer>
-        <Avatar
-          src={useAvatarSrc(friendRequest.from)}
-          sx={{ width: 48, height: 48, mr: 3 }}
-        />
+      <Card>
+        <Avatar src={useAvatarSrc(friendRequest.from)} size="md" mr={3} />
 
         <Box>
           <Flex mb={2}>
-            <Heading as="h3">{friendRequest.from?.username}</Heading>
-            <Heading as="h3" sx={{ color: "textMuted" }}>
+            <Heading>{friendRequest.from?.username}</Heading>
+            <Heading color="GrayText">
               {friendRequest.from?.discriminator}
             </Heading>
           </Flex>
@@ -150,18 +114,21 @@ export const FriendRequestReceived: FC<ReceivedProps> = ({
             }`}
         </Box>
 
-        <Flex
-          sx={{ alignItems: "center", justifyContent: "flex-end", flex: 1 }}
-        >
+        <Flex alignItems="center" justifyContent="flex-end" flex={1}>
           <Text mr={3}>Received {receivedAt}</Text>
-          <IconButton mr={2} variant="close" onClick={onAccept}>
-            <FiCheck size={24} />
-          </IconButton>
-          <IconButton variant="close" onClick={onReject}>
-            <FiX size={24} />
-          </IconButton>
+          <IconButton
+            aria-label="Accept friend request"
+            icon={<FiCheck />}
+            mr={2}
+            onClick={onAccept}
+          />
+          <IconButton
+            aria-label="Ignore friend request"
+            icon={<FiX />}
+            onClick={onReject}
+          />
         </Flex>
-      </FlexContainer>
+      </Card>
     </>
   );
 };

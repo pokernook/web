@@ -1,6 +1,6 @@
+import { Box, Grid } from "@chakra-ui/react";
 import Head from "next/head";
 import { FC, ReactNode } from "react";
-import { Box, Grid } from "theme-ui";
 
 import { useUser } from "../hooks/use-user";
 import { Loading } from "./Loading";
@@ -20,7 +20,6 @@ export const DashboardLayout: FC<DashboardLayoutProps> = ({
     return <Loading />;
   }
 
-  // TODO: scrollbar should be overlayed on page
   return (
     <>
       <Head>
@@ -28,45 +27,32 @@ export const DashboardLayout: FC<DashboardLayoutProps> = ({
       </Head>
 
       <Grid
-        columns={["auto"]}
-        gap="0px"
-        sx={{
-          height: "100vh",
-          width: "100vw",
-          gridTemplateRows: "50px auto min-content",
-        }}
+        templateColumns="auto"
+        gap={0}
+        templateRows="50px auto min-content"
+        h="100vh"
+        w="100vw"
       >
         <TopNav />
         <Grid
-          columns={[2, "280px 1fr"]}
-          gap="0px"
-          sx={{
-            gridTemplateRows: "auto",
-            position: "relative",
-            overflow: "hidden",
-          }}
+          templateColumns={[2, "280px 1fr"]}
+          templateRows="auto"
+          gap={0}
+          position="relative"
+          overflow="hidden"
         >
           <Box
             as="aside"
-            sx={{
-              bg: "sideNav",
-              borderRight: "solid",
-              borderRightColor: "border",
-              borderRightWidth: 1,
-              py: 3,
-            }}
+            bg="sideNav"
+            borderRight="solid"
+            borderRightColor="border"
+            borderRightWidth={1}
+            py={3}
           >
             <SideNav />
           </Box>
 
-          <Box
-            as="main"
-            sx={{
-              minWidth: 0,
-              minHeight: 0,
-              overflow: "auto",
-            }}
-          >
+          <Box as="main" minW={0} minH={0} overflow="auto">
             {children}
           </Box>
         </Grid>
