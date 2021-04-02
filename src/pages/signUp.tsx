@@ -1,69 +1,56 @@
-import Link from "next/link";
-import { FC } from "react";
-import { useForm } from "react-hook-form";
-import { useToasts } from "react-toast-notifications";
 import {
   Box,
   Button,
-  Card,
-  Field,
+  FormControl,
+  FormLabel,
   Heading,
-  Link as ThemeLink,
+  Input,
+  Link as ChakraLink,
   Text,
-} from "theme-ui";
+} from "@chakra-ui/react";
+import Link from "next/link";
+import { FC } from "react";
+import { useForm } from "react-hook-form";
 
 import { AuthLayout } from "../components/AuthLayout";
+import { Card } from "../components/Card";
 import { SignUpMutationVariables, useSignUpMutation } from "../graphql/types";
 
 const SignUp: FC = () => {
   const { register, handleSubmit } = useForm<SignUpMutationVariables>();
   const [signUpResult, signUp] = useSignUpMutation();
-  const { addToast } = useToasts();
 
-  const onSubmit = handleSubmit(async (data) => {
-    const result = await signUp(data);
-    if (result.error) {
-      addToast(result.error.graphQLErrors[0]?.message, { appearance: "error" });
-    }
-  });
+  const onSubmit = handleSubmit((data) => signUp(data));
 
   return (
     <AuthLayout>
-      <Heading as="h2" mb={3}>
-        Create your account
-      </Heading>
+      <Heading mb={3}>Create your account</Heading>
 
       <Card>
         <Box as="form" onSubmit={onSubmit}>
-          <Field
-            autoFocus
-            label="Username"
-            type="text"
-            spellCheck={false}
-            {...register("username", { required: true })}
-            mb={2}
-          />
+          <FormControl mb={2}>
+            <FormLabel>Username</FormLabel>
+            <Input
+              type="text"
+              spellCheck={false}
+              {...register("username", { required: true })}
+            />
+          </FormControl>
 
-          <Field
-            label="Email"
-            type="email"
-            {...register("email", { required: true })}
-            mb={2}
-          />
+          <FormControl mb={2}>
+            <FormLabel>Email</FormLabel>
+            <Input type="email" {...register("email", { required: true })} />
+          </FormControl>
 
-          <Field
-            label="Password"
-            type="password"
-            {...register("password", { required: true })}
-            mb={3}
-          />
+          <FormControl mb={3}>
+            <FormLabel>Password</FormLabel>
+            <Input
+              type="password"
+              {...register("password", { required: true })}
+            />
+          </FormControl>
 
-          <Button
-            type="submit"
-            disabled={signUpResult.fetching}
-            variant="primary"
-            sx={{ minWidth: "70%" }}
-          >
+          <Button type="submit" disabled={signUpResult.fetching} minWidth="70%">
             {signUpResult.fetching
               ? "We're working on it..."
               : "Sign up for PokerNook"}
@@ -75,7 +62,7 @@ const SignUp: FC = () => {
         <Text>
           Been here before?{" "}
           <Link href="/logIn" passHref>
-            <ThemeLink>Log in</ThemeLink>
+            <ChakraLink>Log in</ChakraLink>
           </Link>
           .
         </Text>
