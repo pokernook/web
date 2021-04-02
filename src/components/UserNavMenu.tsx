@@ -50,9 +50,7 @@ export const UserNavMenu: FC = () => {
 
       <Menu isLazy>
         <MenuButton>
-          {avatarSrc && (
-            <Avatar showBorder src={avatarSrc} size="sm" bg="black" />
-          )}
+          <Avatar showBorder src={avatarSrc} size="sm" bg="black" />
         </MenuButton>
         <MenuList>
           <MenuItem>
