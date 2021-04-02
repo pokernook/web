@@ -53,14 +53,12 @@ const SignUp: FC = () => {
           </FormControl>
 
           <Button
-            colorScheme="blue"
+            colorScheme="gray"
             type="submit"
             isLoading={signUpResult.fetching}
             minWidth="70%"
           >
-            {signUpResult.fetching
-              ? "We're working on it..."
-              : "Sign up for PokerNook"}
+            Sign up for PokerNook
           </Button>
         </Box>
       </Card>

@@ -44,7 +44,7 @@ const LogIn: FC = () => {
           </FormControl>
 
           <Button
-            colorScheme="blue"
+            colorScheme="gray"
             type="submit"
             isLoading={logInResult.fetching}
             minWidth="70%"
