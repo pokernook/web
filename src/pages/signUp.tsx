@@ -28,7 +28,7 @@ const SignUp: FC = () => {
         Create your account
       </Heading>
 
-      <Card minW={320} textAlign="center">
+      <Card minW={340} textAlign="center">
         <Box as="form" onSubmit={onSubmit}>
           <FormControl mb={2}>
             <FormLabel>Username</FormLabel>
@@ -60,7 +60,7 @@ const SignUp: FC = () => {
         </Box>
       </Card>
 
-      <Card mt={3} minW={320} textAlign="center">
+      <Card mt={3} minW={340} textAlign="center">
         <Text>
           Been here before?{" "}
           <Link href="/logIn" passHref>

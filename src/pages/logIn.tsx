@@ -28,7 +28,7 @@ const LogIn: FC = () => {
         Enter the &apos;Nook
       </Heading>
 
-      <Card minW={320} textAlign="center">
+      <Card minW={340} textAlign="center">
         <Box as="form" onSubmit={onSubmit}>
           <FormControl mb={2}>
             <FormLabel>Email</FormLabel>
@@ -49,7 +49,7 @@ const LogIn: FC = () => {
         </Box>
       </Card>
 
-      <Card mt={3} minW={320} textAlign="center">
+      <Card mt={3} minW={340} textAlign="center">
         <Text>
           New &apos;round these parts?{" "}
           <Link href="/signUp" passHref>
