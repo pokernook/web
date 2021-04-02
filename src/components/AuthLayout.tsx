@@ -25,7 +25,7 @@ export const AuthLayout: FC<AuthLayoutProps> = ({
         <title>PokerNook - Get in Here</title>
       </Head>
 
-      <Container maxW="md" centerContent pt={20}>
+      <Container centerContent pt={10}>
         <Image height={128} width={128} src="/logo.svg" />
         {children}
       </Container>

@@ -24,9 +24,11 @@ const SignUp: FC = () => {
 
   return (
     <AuthLayout>
-      <Heading mb={3}>Create your account</Heading>
+      <Heading size="lg" mb={3}>
+        Create your account
+      </Heading>
 
-      <Card>
+      <Card minW={320} textAlign="center">
         <Box as="form" onSubmit={onSubmit}>
           <FormControl mb={2}>
             <FormLabel>Username</FormLabel>
@@ -58,7 +60,7 @@ const SignUp: FC = () => {
         </Box>
       </Card>
 
-      <Card mt={3}>
+      <Card mt={3} minW={320} textAlign="center">
         <Text>
           Been here before?{" "}
           <Link href="/logIn" passHref>

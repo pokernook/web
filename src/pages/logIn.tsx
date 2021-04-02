@@ -24,9 +24,11 @@ const LogIn: FC = () => {
 
   return (
     <AuthLayout>
-      <Heading mb={3}>Enter the &apos;Nook</Heading>
+      <Heading size="lg" mb={3}>
+        Enter the &apos;Nook
+      </Heading>
 
-      <Card>
+      <Card minW={320} textAlign="center">
         <Box as="form" onSubmit={onSubmit}>
           <FormControl mb={2}>
             <FormLabel>Email</FormLabel>
@@ -47,7 +49,7 @@ const LogIn: FC = () => {
         </Box>
       </Card>
 
-      <Card mt={3}>
+      <Card mt={3} minW={320} textAlign="center">
         <Text>
           New &apos;round these parts?{" "}
           <Link href="/signUp" passHref>
