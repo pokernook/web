@@ -20,7 +20,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { BaseEmoji, Picker } from "emoji-mart";
-import React, { FC } from "react";
+import { FC } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import {
@@ -30,14 +30,14 @@ import {
 } from "../graphql/types";
 import { useUser } from "../hooks/use-user";
 
-type Props = Pick<ModalProps, "onClose" | "isOpen">;
+type Props = Omit<ModalProps, "children">;
 
 type FormData = StatusSetMutationVariables;
 
 export const StatusModal: FC<Props> = ({ onClose, ...props }: Props) => {
   const { user } = useUser();
-  const { colorMode } = useColorMode();
   const defaultEmoji = user?.status?.emoji || "💬";
+  const { colorMode } = useColorMode();
   const [, clearStatus] = useStatusClearMutation();
   const [, setStatus] = useStatusSetMutation();
   const {
@@ -66,7 +66,7 @@ export const StatusModal: FC<Props> = ({ onClose, ...props }: Props) => {
 
   return (
     <>
-      <Modal autoFocus={false} onClose={onClose} {...props}>
+      <Modal onClose={onClose} {...props}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Set a status</ModalHeader>
