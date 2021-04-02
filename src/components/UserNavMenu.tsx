@@ -12,11 +12,12 @@ import {
   Tooltip,
   useDisclosure,
 } from "@chakra-ui/react";
-import { FC, useState } from "react";
+import { FC } from "react";
 
 import { useLogOutMutation, useStatusClearMutation } from "../graphql/types";
 import { useAvatarSrc } from "../hooks/use-avatar-src";
 import { useUser } from "../hooks/use-user";
+import { ProfileModal } from "./ProfileModal";
 import { StatusModal } from "./StatusModal";
 
 export const UserNavMenu: FC = () => {
@@ -26,10 +27,13 @@ export const UserNavMenu: FC = () => {
     onOpen: onStatusOpen,
     onClose: onStatusClose,
   } = useDisclosure();
+  const {
+    isOpen: isProfileOpen,
+    onOpen: onProfileOpen,
+    onClose: onProfileClose,
+  } = useDisclosure();
   const [, clearStatus] = useStatusClearMutation();
   const [, logOut] = useLogOutMutation();
-  const [, setSettingsModalOpen] = useState(false);
-  const [, setProfileModalOpen] = useState(false);
   const avatarSrc = useAvatarSrc(user);
 
   return (
@@ -61,6 +65,7 @@ export const UserNavMenu: FC = () => {
 
           <MenuItem onClick={onStatusOpen}>
             <Input
+              variant="filled"
               isReadOnly
               _hover={{ cursor: "pointer" }}
               defaultValue={
@@ -77,16 +82,9 @@ export const UserNavMenu: FC = () => {
 
           <MenuDivider />
 
-          <MenuItem onClick={() => setProfileModalOpen(true)}>
-            Edit profile
-          </MenuItem>
+          <MenuItem onClick={onProfileOpen}>Edit profile</MenuItem>
           <MenuItem>View profile</MenuItem>
-          <MenuItem
-            icon={<SettingsIcon />}
-            onClick={() => setSettingsModalOpen(true)}
-          >
-            Settings
-          </MenuItem>
+          <MenuItem icon={<SettingsIcon />}>Settings</MenuItem>
 
           <MenuDivider />
 
@@ -96,6 +94,9 @@ export const UserNavMenu: FC = () => {
 
       {isStatusOpen && (
         <StatusModal onClose={onStatusClose} isOpen={isStatusOpen} />
+      )}
+      {isProfileOpen && (
+        <ProfileModal onClose={onProfileClose} isOpen={isProfileOpen} />
       )}
     </>
   );
