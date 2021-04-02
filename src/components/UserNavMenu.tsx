@@ -71,6 +71,7 @@ export const UserNavMenu: FC = () => {
           <MenuItem onClick={onStatusOpen}>
             <Input
               variant="filled"
+              isTruncated
               isReadOnly
               _hover={{ cursor: "pointer" }}
               defaultValue={
