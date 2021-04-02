@@ -1,6 +1,6 @@
 import { extendTheme, ThemeOverride } from "@chakra-ui/react";
 
-import { Link, Menu } from "./components";
+import { Link, Menu, Modal } from "./components";
 import { styles } from "./styles";
 
 const overrides: ThemeOverride = {
@@ -11,6 +11,7 @@ const overrides: ThemeOverride = {
   components: {
     Link,
     Menu,
+    Modal,
   },
 };
 
