@@ -1,9 +1,27 @@
 import "emoji-mart/css/emoji-mart.css";
 
+import {
+  Button,
+  ButtonGroup,
+  FormControl,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  ModalProps,
+  useColorMode,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { BaseEmoji, Picker } from "emoji-mart";
-import { FC, useState } from "react";
+import React, { FC } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { Box, Button, Field, Text, useColorMode } from "theme-ui";
 
 import {
   StatusSetMutationVariables,
@@ -11,29 +29,22 @@ import {
   useStatusSetMutation,
 } from "../graphql/types";
 import { useUser } from "../hooks/use-user";
-import { FadeIn } from "./Animated";
-import {
-  ModalCard,
-  ModalClose,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalPortal,
-} from "./Modal";
 
-type Props = {
-  onClose: () => void;
-};
+type Props = Pick<ModalProps, "onClose" | "isOpen">;
 
 type FormData = StatusSetMutationVariables;
 
-export const StatusModal: FC<Props> = ({ onClose }: Props) => {
+export const StatusModal: FC<Props> = ({ onClose, ...props }: Props) => {
   const { user } = useUser();
-  const [colorMode] = useColorMode();
+  const { colorMode } = useColorMode();
   const defaultEmoji = user?.status?.emoji || "💬";
   const [, clearStatus] = useStatusClearMutation();
-  const [setStatusResult, setStatus] = useStatusSetMutation();
-  const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
+  const [, setStatus] = useStatusSetMutation();
+  const {
+    isOpen: isPickerOpen,
+    onOpen: onPickerOpen,
+    onClose: onPickerClose,
+  } = useDisclosure();
   const { control, handleSubmit, register, getValues } = useForm<FormData>({
     defaultValues: {
       emoji: defaultEmoji,
@@ -53,85 +64,70 @@ export const StatusModal: FC<Props> = ({ onClose }: Props) => {
     }
   });
 
-  const getEmojiPickerColorMode = (colorMode: string): "light" | "dark" =>
-    colorMode === "light" ? "light" : "dark";
-
   return (
-    <ModalPortal onClose={onClose} hasDimmedBackground>
-      <ModalCard>
-        <ModalClose onClose={onClose} />
-        <ModalHeader>Set a status</ModalHeader>
-
+    <>
+      <Modal onClose={onClose} {...props}>
+        <ModalOverlay />
         <ModalContent>
-          <Box
+          <ModalHeader>Set a status</ModalHeader>
+          <ModalCloseButton />
+
+          <ModalBody
             as="form"
             id="status-form"
             onSubmit={handleSaveStatus}
-            sx={{ px: 3 }}
+            overflowWrap="normal"
           >
-            <Field
-              label={`What's happening ${user?.username || ""}?`}
-              type="text"
-              {...register("message", { required: true })}
-              spellCheck
-              pl={4}
-            />
+            <FormControl mb={3}>
+              <FormLabel>What&apos;s happening {user?.username}?</FormLabel>
+              <InputGroup>
+                <InputLeftElement
+                  w="3rem"
+                  _hover={{ cursor: "pointer" }}
+                  onClick={onPickerOpen}
+                >
+                  {getValues("emoji")}
+                </InputLeftElement>
+                <Input
+                  spellCheck
+                  {...register("message", { required: true })}
+                  pl="3rem"
+                />
+              </InputGroup>
+            </FormControl>
+          </ModalBody>
 
-            <Button
-              variant="unstyled"
-              type="button"
-              onClick={() => setEmojiPickerOpen(true)}
-              sx={{ position: "absolute", p: 2, top: 86 }}
-            >
-              {getValues("emoji")}
-            </Button>
-
-            <Controller
-              name="emoji"
-              control={control}
-              render={({ field }) =>
-                emojiPickerOpen ? (
-                  <ModalPortal onClose={() => setEmojiPickerOpen(false)}>
-                    <Picker
-                      title="Pick an emoji"
-                      emoji="point_up"
-                      native
-                      theme={getEmojiPickerColorMode(colorMode)}
-                      onSelect={(emoji: BaseEmoji) => {
-                        field.onChange(emoji.native);
-                        setEmojiPickerOpen(false);
-                      }}
-                    />
-                  </ModalPortal>
-                ) : (
-                  <></>
-                )
-              }
-            />
-
-            <Box>
-              {setStatusResult.error && (
-                <FadeIn>
-                  <Text variant="danger">
-                    {setStatusResult.error.graphQLErrors[0]?.message ||
-                      setStatusResult.error.networkError?.message}
-                  </Text>
-                </FadeIn>
-              )}
-            </Box>
-          </Box>
+          <ModalFooter>
+            <ButtonGroup>
+              <Button onClick={handleClearStatus}>Clear status</Button>
+              <Button colorScheme="blue" type="submit" form="status-form">
+                Save status
+              </Button>
+            </ButtonGroup>
+          </ModalFooter>
         </ModalContent>
+      </Modal>
 
-        <ModalFooter>
-          <Button variant="tertiary" mr={2} onClick={handleClearStatus}>
-            Clear status
-          </Button>
-
-          <Button variant="secondary" type="submit" form="status-form">
-            Save status
-          </Button>
-        </ModalFooter>
-      </ModalCard>
-    </ModalPortal>
+      <Modal isOpen={isPickerOpen} onClose={onPickerClose}>
+        <ModalContent w={0} h={0}>
+          <Controller
+            name="emoji"
+            control={control}
+            render={({ field }) => (
+              <Picker
+                title="Pick an emoji"
+                emoji="point_up"
+                native
+                theme={colorMode}
+                onSelect={(emoji: BaseEmoji) => {
+                  field.onChange(emoji.native);
+                  onPickerClose();
+                }}
+              />
+            )}
+          />
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
