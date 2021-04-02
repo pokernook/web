@@ -24,7 +24,7 @@ const SignUp: FC = () => {
 
   return (
     <AuthLayout>
-      <Heading size="lg" mb={3}>
+      <Heading size="md" mb={3}>
         Create your account
       </Heading>
 
@@ -52,7 +52,12 @@ const SignUp: FC = () => {
             />
           </FormControl>
 
-          <Button type="submit" disabled={signUpResult.fetching} minWidth="70%">
+          <Button
+            colorScheme="gray"
+            type="submit"
+            isLoading={signUpResult.fetching}
+            minWidth="70%"
+          >
             {signUpResult.fetching
               ? "We're working on it..."
               : "Sign up for PokerNook"}

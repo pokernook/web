@@ -24,7 +24,7 @@ const LogIn: FC = () => {
 
   return (
     <AuthLayout>
-      <Heading size="lg" mb={3}>
+      <Heading size="md" mb={3}>
         Enter the &apos;Nook
       </Heading>
 
@@ -43,8 +43,13 @@ const LogIn: FC = () => {
             />
           </FormControl>
 
-          <Button type="submit" disabled={logInResult.fetching} minWidth="70%">
-            {logInResult.fetching ? "Hang in there..." : "Log in to PokerNook"}
+          <Button
+            colorScheme="gray"
+            type="submit"
+            isLoading={logInResult.fetching}
+            minWidth="70%"
+          >
+            Log in to PokerNook
           </Button>
         </Box>
       </Card>
