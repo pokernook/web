@@ -1,55 +1,16 @@
-export const theme = {
-  colors: {
-    background: "#fff",
-    text: "#24292e",
-    buttonText: "#f0f6fc",
-    primary: "#2ea44f",
-    secondary: "#1f71eb",
-    gray: "#848d96",
-    success: "#56d364",
-    error: "#e83a31",
-    warning: "#b8841c",
-    border: "#d1d5da",
-    muted: "#f7f7f7",
-    textMuted: "#868e9c",
-    topNav: "#f8f8fa",
-    sideNav: "#f8f8fa",
-    modes: {
-      dark: {
-        background: "#06090e",
-        text: "#f0f6fc",
-        buttonText: "#f0f6fc",
-        primary: "#238636",
-        secondary: "#1f71eb",
-        gray: "#2f353d",
-        success: "#56d364",
-        error: "#f85249",
-        warning: "#b8841c",
-        border: "#2f353d",
-        muted: "#0e1116",
-        textMuted: "#4b5669",
-        topNav: "#06090e",
-        sideNav: "#06090e",
-      },
-    },
+import { extendTheme, ThemeOverride } from "@chakra-ui/react";
+
+import { Link } from "./components";
+import { styles } from "./styles";
+
+const overrides: ThemeOverride = {
+  styles,
+  config: {
+    useSystemColorMode: true,
   },
-  links: {
-    nav: {
-      display: "flex",
-      alignItems: "center",
-      borderRadius: 4,
-      color: "text",
-      textDecoration: "none",
-      p: 2,
-      ":hover,:focus": {
-        color: "text",
-        // bg: alpha("secondary", 0.15),
-        cursor: "pointer",
-      },
-      "&.active": {
-        color: "buttonText",
-        bg: "secondary",
-      },
-    },
+  components: {
+    Link,
   },
 };
+
+export const theme = extendTheme(overrides);

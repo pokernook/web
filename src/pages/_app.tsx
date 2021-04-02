@@ -3,7 +3,7 @@ import { AppProps } from "next/app";
 import { withUrqlClient, WithUrqlProps } from "next-urql";
 import { FC } from "react";
 
-import { theme } from "../chakra-theme";
+import { theme } from "../theme";
 import { getClientConfig } from "../urql";
 
 const App = ({ Component, pageProps }: AppProps) => {
