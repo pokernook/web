@@ -1,6 +1,5 @@
-import { Container } from "@chakra-ui/react";
+import { Container, Img } from "@chakra-ui/react";
 import Head from "next/head";
-import Image from "next/image";
 import { FC, ReactNode } from "react";
 
 import { useUser } from "../hooks/use-user";
@@ -26,7 +25,7 @@ export const AuthLayout: FC<AuthLayoutProps> = ({
       </Head>
 
       <Container centerContent pt={10}>
-        <Image height={128} width={128} src="/logo.svg" />
+        <Img boxSize={128} src="/logo.svg" />
         {children}
       </Container>
     </>
