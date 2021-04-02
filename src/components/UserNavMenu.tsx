@@ -42,9 +42,11 @@ export const UserNavMenu: FC = () => {
         </Tooltip>
       )}
 
-      <Menu>
+      <Menu isLazy>
         <MenuButton>
-          <Avatar showBorder src={avatarSrc} size="sm" bg="black" />
+          {avatarSrc && (
+            <Avatar showBorder src={avatarSrc} size="sm" bg="black" />
+          )}
         </MenuButton>
         <MenuList>
           <MenuItem>
