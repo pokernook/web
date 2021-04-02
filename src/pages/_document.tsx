@@ -1,3 +1,4 @@
+import { ColorModeScript } from "@chakra-ui/react";
 import {
   default as NextDocument,
   Head,
@@ -12,6 +13,7 @@ class Document extends NextDocument {
       <Html>
         <Head />
         <body>
+          <ColorModeScript />
           <Main />
           <NextScript />
         </body>
