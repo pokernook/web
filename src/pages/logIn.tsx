@@ -43,12 +43,7 @@ const LogIn: FC = () => {
             />
           </FormControl>
 
-          <Button
-            colorScheme="gray"
-            type="submit"
-            isLoading={logInResult.fetching}
-            isFullWidth
-          >
+          <Button type="submit" isLoading={logInResult.fetching} isFullWidth>
             Log in to PokerNook
           </Button>
         </Box>
