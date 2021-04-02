@@ -31,12 +31,12 @@ export const SettingsModal: FC<Props> = ({ ...props }: Props) => {
 
         <ModalBody h={450} roundedBottom="md">
           <Tabs isLazy orientation="vertical">
-            <TabList>
+            <TabList position="fixed">
               <Tab>Account</Tab>
               <Tab>Theme</Tab>
             </TabList>
 
-            <TabPanels>
+            <TabPanels ml="32">
               <TabPanel>
                 <AccountSettings />
               </TabPanel>
