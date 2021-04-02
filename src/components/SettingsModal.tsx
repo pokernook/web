@@ -1,4 +1,15 @@
-/** @jsxImportSource theme-ui */
+import {
+  Box,
+  Divider,
+  Grid,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  ModalProps,
+} from "@chakra-ui/react";
 import { FC } from "react";
 import {
   MemoryRouter,
@@ -7,50 +18,36 @@ import {
   Redirect,
   Route,
 } from "react-router-dom";
-import { Box, Divider, Grid } from "theme-ui";
 
 import { AccountSettings } from "./AccountSettings";
-import {
-  ModalCard,
-  ModalClose,
-  ModalContent,
-  ModalHeader,
-  ModalPortal,
-} from "./Modal";
 import { ThemeSettings } from "./ThemeSettings";
 
-type Props = {
-  onClose: () => void;
-};
+type Props = Omit<ModalProps, "children">;
 
-export const SettingsModal: FC<Props> = ({ onClose }: Props) => {
+export const SettingsModal: FC<Props> = ({ ...props }: Props) => {
   return (
-    <ModalPortal onClose={onClose} hasDimmedBackground>
-      <ModalCard>
-        <ModalClose onClose={onClose} />
+    <Modal size="2xl" scrollBehavior="inside" {...props}>
+      <ModalOverlay />
+      <ModalContent>
         <ModalHeader>Settings</ModalHeader>
-
+        <ModalCloseButton />
         <Divider />
 
-        <MemoryRouter>
-          <ModalContent>
-            <Grid
-              gap={3}
-              columns={[2, "2fr 5fr"]}
-              sx={{ height: 450, width: 650, ml: 3 }}
-            >
-              <Box sx={{ my: 2 }}>
+        <ModalBody h={450} roundedBottom="md">
+          <MemoryRouter>
+            <Grid gap={3} templateColumns={[2, "2fr 5fr"]} ml={3}>
+              <Box>
                 <SettingsNav />
               </Box>
 
-              <Box sx={{ overflow: "auto", py: 3, pr: 4 }}>
+              <Box pr={4}>
                 <SettingsRoutes />
               </Box>
             </Grid>
-          </ModalContent>
-        </MemoryRouter>
-      </ModalCard>
-    </ModalPortal>
+          </MemoryRouter>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   );
 };
 
@@ -63,7 +60,7 @@ const SettingsNav = () => (
   <>
     {settingsNavRoutes.map((props, idx) => (
       <Box key={idx} my={1}>
-        <NavLink {...props} sx={{ variant: "links.nav" }} />
+        <NavLink {...props} />
       </Box>
     ))}
   </>
