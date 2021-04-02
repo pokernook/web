@@ -20,7 +20,7 @@ const LogIn: FC = () => {
   const { register, handleSubmit } = useForm<LogInMutationVariables>();
   const [logInResult, logIn] = useLogInMutation();
 
-  const onSubmit = handleSubmit(async (data) => logIn(data));
+  const onSubmit = handleSubmit((data) => logIn(data));
 
   return (
     <AuthLayout>
