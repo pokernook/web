@@ -1,7 +1,5 @@
 import {
-  Box,
   Divider,
-  Grid,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -9,15 +7,13 @@ import {
   ModalHeader,
   ModalOverlay,
   ModalProps,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
 } from "@chakra-ui/react";
 import { FC } from "react";
-import {
-  MemoryRouter,
-  NavLink,
-  NavLinkProps,
-  Redirect,
-  Route,
-} from "react-router-dom";
 
 import { AccountSettings } from "./AccountSettings";
 import { ThemeSettings } from "./ThemeSettings";
@@ -34,50 +30,24 @@ export const SettingsModal: FC<Props> = ({ ...props }: Props) => {
         <Divider />
 
         <ModalBody h={450} roundedBottom="md">
-          <MemoryRouter>
-            <Grid gap={3} templateColumns={[2, "2fr 5fr"]} ml={3}>
-              <Box>
-                <SettingsNav />
-              </Box>
+          <Tabs isLazy orientation="vertical">
+            <TabList>
+              <Tab>Account</Tab>
+              <Tab>Theme</Tab>
+            </TabList>
 
-              <Box pr={4}>
-                <SettingsRoutes />
-              </Box>
-            </Grid>
-          </MemoryRouter>
+            <TabPanels>
+              <TabPanel>
+                <AccountSettings />
+              </TabPanel>
+
+              <TabPanel>
+                <ThemeSettings />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
         </ModalBody>
       </ModalContent>
     </Modal>
   );
 };
-
-const settingsNavRoutes: NavLinkProps[] = [
-  { to: "/settings/account", exact: true, children: "Account" },
-  { to: "/settings/theme", exact: true, children: "Theme" },
-];
-
-const SettingsNav = () => (
-  <>
-    {settingsNavRoutes.map((props, idx) => (
-      <Box key={idx} my={1}>
-        <NavLink {...props} />
-      </Box>
-    ))}
-  </>
-);
-
-const SettingsRoutes = () => (
-  <>
-    <Route exact path="/settings/account">
-      <AccountSettings />
-    </Route>
-
-    <Route exact path="/settings/theme">
-      <ThemeSettings />
-    </Route>
-
-    <Route>
-      <Redirect to="/settings/account" />
-    </Route>
-  </>
-);
