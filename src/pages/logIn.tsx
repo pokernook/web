@@ -1,61 +1,51 @@
-import Link from "next/link";
-import { FC } from "react";
-import { useForm } from "react-hook-form";
-import { useToasts } from "react-toast-notifications";
 import {
   Box,
   Button,
-  Card,
-  Field,
+  FormControl,
+  FormLabel,
   Heading,
-  Link as ThemeLink,
+  Input,
+  Link as ChakraLink,
   Text,
-} from "theme-ui";
+} from "@chakra-ui/react";
+import Link from "next/link";
+import { FC } from "react";
+import { useForm } from "react-hook-form";
 
 import { AuthLayout } from "../components/AuthLayout";
+import { Card } from "../components/Card";
 import { LogInMutationVariables, useLogInMutation } from "../graphql/types";
 
 const LogIn: FC = () => {
   const { register, handleSubmit } = useForm<LogInMutationVariables>();
   const [logInResult, logIn] = useLogInMutation();
-  const { addToast } = useToasts();
 
-  const onSubmit = handleSubmit(async (data) => {
-    const result = await logIn(data);
-    if (result.error) {
-      addToast(result.error.graphQLErrors[0]?.message, { appearance: "error" });
-    }
-  });
+  const onSubmit = handleSubmit(async (data) => logIn(data));
 
   return (
     <AuthLayout>
-      <Heading as="h2" mb={3}>
-        Enter the &apos;Nook
-      </Heading>
+      <Heading mb={3}>Enter the &apos;Nook</Heading>
 
       <Card>
         <Box as="form" onSubmit={onSubmit}>
-          <Field
-            autoFocus
-            label="Email"
-            type="email"
-            {...register("email", { required: true })}
-            mb={2}
-          />
+          <FormControl mb={2}>
+            <FormLabel>Email</FormLabel>
+            <Input
+              autoFocus
+              type="email"
+              {...register("email", { required: true })}
+            />
+          </FormControl>
 
-          <Field
-            label="Password"
-            type="password"
-            {...register("password", { required: true })}
-            mb={3}
-          />
+          <FormControl mb={3}>
+            <FormLabel>Password</FormLabel>
+            <Input
+              type="password"
+              {...register("password", { required: true })}
+            />
+          </FormControl>
 
-          <Button
-            type="submit"
-            disabled={logInResult.fetching}
-            variant="primary"
-            sx={{ minWidth: "70%" }}
-          >
+          <Button type="submit" disabled={logInResult.fetching} minWidth="70%">
             {logInResult.fetching ? "Hang in there..." : "Log in to PokerNook"}
           </Button>
         </Box>
@@ -65,7 +55,7 @@ const LogIn: FC = () => {
         <Text>
           New &apos;round these parts?{" "}
           <Link href="/signUp" passHref>
-            <ThemeLink>Sign up</ThemeLink>
+            <ChakraLink>Sign up</ChakraLink>
           </Link>
           .
         </Text>
