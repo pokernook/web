@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { FC } from "react";
 
-import { useLogOutMutation, useStatusClearMutation } from "../graphql/types";
+import { useLogOutMutation, useStatusClearMutation } from "../graphql";
 import { useAvatarSrc } from "../hooks/use-avatar-src";
 import { useUser } from "../hooks/use-user";
 import { ProfileModal } from "./ProfileModal";

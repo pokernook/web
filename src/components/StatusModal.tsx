@@ -27,7 +27,7 @@ import {
   StatusSetMutationVariables,
   useStatusClearMutation,
   useStatusSetMutation,
-} from "../graphql/types";
+} from "../graphql";
 import { useUser } from "../hooks/use-user";
 
 type Props = Omit<ModalProps, "children">;

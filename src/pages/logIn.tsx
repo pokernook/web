@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 
 import { AuthLayout } from "../components/AuthLayout";
 import { Card } from "../components/Card";
-import { LogInMutationVariables, useLogInMutation } from "../graphql/types";
+import { LogInMutationVariables, useLogInMutation } from "../graphql";
 
 const LogIn: FC = () => {
   const { register, handleSubmit } = useForm<LogInMutationVariables>();

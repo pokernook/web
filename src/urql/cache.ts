@@ -1,6 +1,6 @@
 import { ResolverConfig, UpdatesConfig } from "@urql/exchange-graphcache";
 
-import * as graphql from "../graphql/types";
+import * as graphql from "../graphql";
 
 export const resolvers: ResolverConfig = {
   User: {

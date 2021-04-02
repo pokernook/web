@@ -4,7 +4,7 @@ import { FC } from "react";
 import { DashboardLayout } from "../../components/DashboardLayout";
 import { Friend } from "../../components/Friends";
 import { FriendsLayout } from "../../components/FriendsLayout";
-import { useFriendshipsQuery } from "../../graphql/types";
+import { useFriendshipsQuery } from "../../graphql";
 
 const Friends: FC = () => {
   const [friendshipsQuery] = useFriendshipsQuery();

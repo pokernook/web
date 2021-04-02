@@ -21,7 +21,7 @@ import {
 import { ChangeEvent, FC, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { useUpdateUsernameMutation } from "../graphql/types";
+import { useUpdateUsernameMutation } from "../graphql";
 import { useAvatarSrc } from "../hooks/use-avatar-src";
 import { useUser } from "../hooks/use-user";
 import { CropperModal } from "./CropperModal";

@@ -22,7 +22,7 @@ import {
   useFriendRequestSendMutation,
   useFriendRequestsReceivedQuery,
   useFriendRequestsSentQuery,
-} from "../../graphql/types";
+} from "../../graphql";
 import { parseUserTag } from "../../utils/parse-user-tag";
 
 type FormData = {

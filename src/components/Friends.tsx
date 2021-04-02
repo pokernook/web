@@ -4,10 +4,7 @@ import { FC } from "react";
 import { FiCheck, FiMoreVertical, FiX } from "react-icons/fi";
 
 import { Card } from "../components/Card";
-import {
-  FriendRequestFieldsFragment,
-  UserFieldsFragment,
-} from "../graphql/types";
+import { FriendRequestFieldsFragment, UserFieldsFragment } from "../graphql";
 import { useAvatarSrc } from "../hooks/use-avatar-src";
 
 type FriendProps = {
