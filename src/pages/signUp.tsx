@@ -53,7 +53,7 @@ const SignUp: FC = () => {
           </FormControl>
 
           <Button
-            colorScheme="gray"
+            colorScheme="blue"
             type="submit"
             isLoading={signUpResult.fetching}
             minWidth="70%"
@@ -66,7 +66,7 @@ const SignUp: FC = () => {
       </Card>
 
       <Card mt={3} minW={340} textAlign="center">
-        <Text>
+        <Text fontWeight={600}>
           Been here before?{" "}
           <Link href="/logIn" passHref>
             <ChakraLink>Log in</ChakraLink>
