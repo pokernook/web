@@ -20,7 +20,7 @@ import {
   useDeleteAccountMutation,
   useUpdateEmailMutation,
   useUpdatePasswordMutation,
-} from "../graphql/types";
+} from "../graphql";
 import { useUser } from "../hooks/use-user";
 
 export const AccountSettings: FC = () => (
