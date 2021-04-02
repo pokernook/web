@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   ButtonGroup,
   Modal,
@@ -44,22 +45,25 @@ export const CropperModal: FC<Props> = ({
   };
 
   return (
-    <Modal onClose={onClose} {...props}>
+    <Modal size="xl" onClose={onClose} {...props}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Crop your photo</ModalHeader>
         <ModalCloseButton />
 
         <ModalBody>
-          <Cropper
-            aspect={1}
-            image={imageUrl}
-            crop={crop}
-            onCropChange={setCrop}
-            onCropComplete={handleCropComplete}
-            zoom={zoom}
-            onZoomChange={setZoom}
-          />
+          <Box position="relative" minH={350}>
+            <Cropper
+              aspect={1}
+              cropShape="round"
+              image={imageUrl}
+              crop={crop}
+              onCropChange={setCrop}
+              onCropComplete={handleCropComplete}
+              zoom={zoom}
+              onZoomChange={setZoom}
+            />
+          </Box>
         </ModalBody>
 
         <ModalFooter>
