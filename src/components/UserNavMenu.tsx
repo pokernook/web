@@ -94,7 +94,9 @@ export const UserNavMenu: FC = () => {
         </MenuList>
       </Menu>
 
-      <StatusModal onClose={onStatusClose} isOpen={isStatusOpen} />
+      {isStatusOpen && (
+        <StatusModal onClose={onStatusClose} isOpen={isStatusOpen} />
+      )}
     </>
   );
 };
