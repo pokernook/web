@@ -9,7 +9,6 @@ import {
   Heading,
   Input,
   Link,
-  Text,
 } from "@chakra-ui/react";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
@@ -56,9 +55,11 @@ const UpdateEmail = () => {
 
   return (
     <Box as="form" onSubmit={onSubmit}>
-      <Heading mb={3}>Email</Heading>
+      <Heading size="md" mb={3}>
+        Email
+      </Heading>
 
-      <FormControl mb={3}>
+      <FormControl mb={2}>
         <FormLabel>Email address</FormLabel>
         <Input type="email" {...register("newEmail", { required: true })} />
         <FormHelperText>
@@ -71,7 +72,7 @@ const UpdateEmail = () => {
         </FormHelperText>
       </FormControl>
 
-      <Fade in={isDirty}>
+      <Fade in={isDirty} unmountOnExit>
         <FormControl mb={3}>
           <FormLabel>Password</FormLabel>
           <Input
@@ -102,10 +103,12 @@ const UpdatePassword = () => {
   });
 
   return (
-    <Box onSubmit={onSubmit}>
-      <Heading mb={3}>Update password</Heading>
+    <Box as="form" onSubmit={onSubmit}>
+      <Heading size="md" mb={3}>
+        Update password
+      </Heading>
 
-      <FormControl mb={3}>
+      <FormControl mb={2}>
         <FormLabel>Current password</FormLabel>
         <Input
           type="password"
@@ -133,12 +136,14 @@ const DeleteAccount = () => {
 
   return (
     <>
-      <Heading mb={3}>Delete account</Heading>
-      <Box mb={3}>
-        <Text>Careful, there&apos;s no coming back.</Text>
-      </Box>
+      <Heading size="md" mb={3}>
+        Delete account
+      </Heading>
+      <FormLabel mb={2}>Careful, there&apos;s no coming back.</FormLabel>
 
-      <Button onClick={handleDeleteAccount}>Delete account</Button>
+      <Button colorScheme="red" onClick={handleDeleteAccount}>
+        Delete account
+      </Button>
     </>
   );
 };
