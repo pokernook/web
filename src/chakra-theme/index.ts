@@ -1,6 +1,6 @@
 import { extendTheme, ThemeOverride } from "@chakra-ui/react";
 
-import { Button, Link } from "./components";
+import { Link } from "./components";
 import { styles } from "./styles";
 
 const overrides: ThemeOverride = {
@@ -9,7 +9,6 @@ const overrides: ThemeOverride = {
     useSystemColorMode: true,
   },
   components: {
-    Button,
     Link,
   },
 };
