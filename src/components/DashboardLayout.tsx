@@ -41,14 +41,7 @@ export const DashboardLayout: FC<DashboardLayoutProps> = ({
           position="relative"
           overflow="hidden"
         >
-          <Box
-            as="aside"
-            bg="sideNav"
-            borderRight="solid"
-            borderRightColor="border"
-            borderRightWidth={1}
-            py={3}
-          >
+          <Box as="aside" bg="sideNav" borderRightWidth={1} py={3}>
             <SideNav />
           </Box>
 
