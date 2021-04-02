@@ -72,12 +72,7 @@ export const StatusModal: FC<Props> = ({ onClose, ...props }: Props) => {
           <ModalHeader>Set a status</ModalHeader>
           <ModalCloseButton />
 
-          <ModalBody
-            as="form"
-            id="status-form"
-            onSubmit={handleSaveStatus}
-            overflowWrap="normal"
-          >
+          <ModalBody as="form" id="status-form" onSubmit={handleSaveStatus}>
             <FormControl mb={3}>
               <FormLabel>What&apos;s happening {user?.username}?</FormLabel>
               <InputGroup>
