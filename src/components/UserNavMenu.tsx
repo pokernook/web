@@ -2,6 +2,7 @@ import { SettingsIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   Button,
+  Input,
   Menu,
   MenuButton,
   MenuDivider,
@@ -9,19 +10,25 @@ import {
   MenuList,
   Text,
   Tooltip,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { FC, useState } from "react";
 
 import { useLogOutMutation, useStatusClearMutation } from "../graphql/types";
 import { useAvatarSrc } from "../hooks/use-avatar-src";
 import { useUser } from "../hooks/use-user";
+import { StatusModal } from "./StatusModal";
 
 export const UserNavMenu: FC = () => {
   const { user } = useUser();
+  const {
+    isOpen: isStatusOpen,
+    onOpen: onStatusOpen,
+    onClose: onStatusClose,
+  } = useDisclosure();
   const [, clearStatus] = useStatusClearMutation();
   const [, logOut] = useLogOutMutation();
   const [, setSettingsModalOpen] = useState(false);
-  const [, setStatusModalOpen] = useState(false);
   const [, setProfileModalOpen] = useState(false);
   const avatarSrc = useAvatarSrc(user);
 
@@ -31,12 +38,7 @@ export const UserNavMenu: FC = () => {
         <Tooltip
           label={`${user.status.emoji || ""} ${user.status.message || ""}`}
         >
-          <Button
-            onClick={() => setStatusModalOpen(true)}
-            p={1}
-            mr={2}
-            variant="ghost"
-          >
+          <Button onClick={onStatusOpen} p={1} mr={2} variant="ghost">
             {user.status.emoji}
           </Button>
         </Tooltip>
@@ -57,12 +59,16 @@ export const UserNavMenu: FC = () => {
             </Text>
           </MenuItem>
 
-          <MenuItem onClick={() => setStatusModalOpen(true)}>
-            <Button isTruncated isFullWidth variant="outline">
-              {user?.status
-                ? `${user.status.emoji || ""} ${user.status.message || ""}`
-                : "Update status"}
-            </Button>
+          <MenuItem onClick={onStatusOpen}>
+            <Input
+              isReadOnly
+              _hover={{ cursor: "pointer" }}
+              defaultValue={
+                user?.status
+                  ? `${user.status.emoji || ""} ${user.status.message || ""}`
+                  : "Update status"
+              }
+            />
           </MenuItem>
 
           {user?.status && (
@@ -87,6 +93,8 @@ export const UserNavMenu: FC = () => {
           <MenuItem onClick={() => logOut()}>Log out of PokerNook</MenuItem>
         </MenuList>
       </Menu>
+
+      <StatusModal onClose={onStatusClose} isOpen={isStatusOpen} />
     </>
   );
 };
