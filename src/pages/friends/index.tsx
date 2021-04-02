@@ -1,5 +1,5 @@
+import { Box } from "@chakra-ui/react";
 import { FC } from "react";
-import { Box } from "theme-ui";
 
 import { DashboardLayout } from "../../components/DashboardLayout";
 import { Friend } from "../../components/Friends";

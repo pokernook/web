@@ -1,7 +1,13 @@
+import {
+  Box,
+  Button,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputRightElement,
+} from "@chakra-ui/react";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
-import { useToasts } from "react-toast-notifications";
-import { Box, Button, Grid, Input, Label } from "theme-ui";
 
 import { DashboardLayout } from "../../components/DashboardLayout";
 import {
@@ -26,33 +32,33 @@ type FormData = {
 const PendingFriends: FC = () => {
   const { register, reset, handleSubmit } = useForm<FormData>();
   const [, sendFriendRequest] = useFriendRequestSendMutation();
-  const { addToast } = useToasts();
 
   const onSubmit = handleSubmit(async ({ tag }) => {
     const userTag = parseUserTag(tag);
     const result = await sendFriendRequest(userTag);
-    result.error
-      ? addToast(result.error.graphQLErrors[0]?.message, {
-          appearance: "error",
-        })
-      : reset();
+    if (!result.error) {
+      reset();
+    }
   });
 
   return (
     <DashboardLayout>
       <FriendsLayout>
         <Box as="form" onSubmit={onSubmit} mb={3}>
-          <Label>Add a friend with their PokerNook Tag</Label>
-          <Grid columns={["4fr 1fr"]} sx={{ alignItems: "center" }}>
+          <FormLabel>Add a friend with their PokerNook Tag</FormLabel>
+          <InputGroup>
             <Input
-              {...register("tag", { required: true, pattern: /^.+#\d{1,4}$/ })}
+              {...register("tag", {
+                required: true,
+                pattern: /^.+#\d{1,4}$/,
+              })}
+              pr="4.5rem"
               placeholder="Enter a Username#0000"
             />
-
-            <Button type="submit" variant="secondary">
-              Add friend
-            </Button>
-          </Grid>
+            <InputRightElement width="4.5rem">
+              <Button type="submit">Add friend</Button>
+            </InputRightElement>
+          </InputGroup>
         </Box>
 
         <ReceivedList />
