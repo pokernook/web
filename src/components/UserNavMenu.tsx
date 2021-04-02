@@ -46,6 +46,7 @@ export const UserNavMenu: FC = () => {
     <>
       {user?.status && (
         <Tooltip
+          placement="bottom-start"
           label={`${user.status.emoji || ""} ${user.status.message || ""}`}
         >
           <Button onClick={onStatusOpen} p={1} mr={2} variant="ghost">
