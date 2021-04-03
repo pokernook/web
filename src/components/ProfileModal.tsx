@@ -68,7 +68,7 @@ export const ProfileModal: FC<Props> = ({ onClose, ...props }: Props) => {
 
   return (
     <>
-      <Modal size="lg" onClose={onClose} {...props}>
+      <Modal size="2xl" onClose={onClose} {...props}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Edit your profile</ModalHeader>

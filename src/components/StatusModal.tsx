@@ -66,7 +66,7 @@ export const StatusModal: FC<Props> = ({ onClose, ...props }: Props) => {
 
   return (
     <>
-      <Modal onClose={onClose} {...props}>
+      <Modal size="2xl" onClose={onClose} {...props}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Set a status</ModalHeader>
