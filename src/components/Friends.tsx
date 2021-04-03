@@ -81,7 +81,7 @@ export const FriendRequestSent: FC<SentProps> = ({
       </Box>
 
       <HStack justifyContent="flex-end" flex={1}>
-        <Text>Sent {sentAt}</Text>
+        <Text fontSize="sm">Sent {sentAt}</Text>
         <IconButton
           aria-label="Cancel friend request"
           icon={<Icon as={FiX} />}
@@ -127,7 +127,7 @@ export const FriendRequestReceived: FC<ReceivedProps> = ({
       </Box>
 
       <HStack justifyContent="flex-end" flex={1}>
-        <Text>Received {receivedAt}</Text>
+        <Text fontSize="sm">Received {receivedAt}</Text>
         <IconButton
           aria-label="Accept friend request"
           icon={<Icon as={FiCheck} />}
