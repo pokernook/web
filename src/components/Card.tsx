@@ -4,5 +4,5 @@ import { FC } from "react";
 type CardProps = BoxProps;
 
 export const Card: FC<CardProps> = (props) => (
-  <Box p={4} rounded="sm" borderWidth={1} {...props} />
+  <Box p={4} rounded="md" borderWidth={1} {...props} />
 );
