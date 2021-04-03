@@ -53,7 +53,7 @@ const Friends: FC = () => (
 
           <TabPanel>
             <AddFriend />
-            <Stack>
+            <Stack mt={3}>
               <SentRequests />
               <ReceivedRequests />
             </Stack>
