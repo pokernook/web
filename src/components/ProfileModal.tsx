@@ -87,7 +87,7 @@ export const ProfileModal: FC<Props> = ({ onClose, ...props }: Props) => {
                 <FormLabel>Profile photo</FormLabel>
                 <Avatar
                   src={croppedImageUrl || avatarSrc}
-                  boxSize={160}
+                  size="full"
                   bg="black"
                   mb={3}
                 />
