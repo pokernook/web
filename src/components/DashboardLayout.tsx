@@ -1,4 +1,4 @@
-import { Box, Grid } from "@chakra-ui/react";
+import { Box, Center, Grid } from "@chakra-ui/react";
 import Head from "next/head";
 import { FC, ReactNode } from "react";
 
@@ -46,7 +46,7 @@ export const DashboardLayout: FC<DashboardLayoutProps> = ({
           </Box>
 
           <Box as="main" minW={0} minH={0} overflow="auto">
-            {children}
+            <Center>{children}</Center>
           </Box>
         </Grid>
       </Grid>
