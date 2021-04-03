@@ -105,7 +105,6 @@ const AddFriend = () => {
             {...register("tag", { required: true, pattern: /^.+#\d{1,4}$/ })}
             spellCheck={false}
             placeholder="Enter a Username#0000"
-            pr="4.5rem"
           />
 
           <Button colorScheme="blue" w="xs" type="submit">
