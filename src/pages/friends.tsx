@@ -84,7 +84,7 @@ const AllFriends = () => {
 };
 
 const AddFriend = () => {
-  const { register, reset, handleSubmit } = useForm();
+  const { register, reset, handleSubmit } = useForm<{ tag: string }>();
   const [, sendFriendRequest] = useFriendRequestSendMutation();
 
   const onSubmit = handleSubmit(async ({ tag }) => {
@@ -107,7 +107,7 @@ const AddFriend = () => {
             pr="4.5rem"
           />
 
-          <Button colorScheme="blue" w="44">
+          <Button colorScheme="blue" w="xs" type="submit">
             Add friend
           </Button>
         </HStack>
