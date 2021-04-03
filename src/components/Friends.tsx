@@ -12,7 +12,7 @@ type FriendCard = {
 };
 
 const FriendCard: FC<FriendCard> = ({ children }: FriendCard) => (
-  <Card display="flex" alignItems="center" _hover={{ bg: "gray.900" }}>
+  <Card display="flex" alignItems="center">
     {children}
   </Card>
 );
