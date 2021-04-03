@@ -42,6 +42,7 @@ export const UserNavMenu: FC = () => {
   const [, logOut] = useLogOutMutation();
   const avatarSrc = useAvatarSrc(user);
 
+  // TODO: Why the f do the avatars flash??
   return (
     <>
       {user?.status && (
