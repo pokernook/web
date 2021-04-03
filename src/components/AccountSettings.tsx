@@ -1,6 +1,14 @@
 import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogCloseButton,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
   Box,
   Button,
+  ButtonGroup,
   Divider,
   Fade,
   FormControl,
@@ -9,8 +17,9 @@ import {
   Heading,
   Input,
   Link,
+  useDisclosure,
 } from "@chakra-ui/react";
-import { FC } from "react";
+import { FC, useRef } from "react";
 import { useForm } from "react-hook-form";
 
 import {
@@ -131,6 +140,11 @@ const UpdatePassword = () => {
 
 const DeleteAccount = () => {
   const [, deleteAccount] = useDeleteAccountMutation();
+  const {
+    isOpen: isAlertOpen,
+    onOpen: onAlertOpen,
+    onClose: onAlertClose,
+  } = useDisclosure();
 
   const handleDeleteAccount = () => deleteAccount();
 
@@ -141,9 +155,61 @@ const DeleteAccount = () => {
       </Heading>
       <FormLabel mb={2}>Careful, there&apos;s no coming back.</FormLabel>
 
-      <Button colorScheme="red" onClick={handleDeleteAccount}>
+      <Button colorScheme="red" onClick={onAlertOpen}>
         Delete account
       </Button>
+
+      <AccountDeleteAlert
+        isOpen={isAlertOpen}
+        onClose={onAlertClose}
+        onConfirm={handleDeleteAccount}
+      />
     </>
+  );
+};
+
+type AccountDeleteAlertProps = {
+  onClose: () => void;
+  isOpen: boolean;
+  onConfirm: () => void;
+};
+
+const AccountDeleteAlert: FC<AccountDeleteAlertProps> = ({
+  onClose,
+  isOpen,
+  onConfirm,
+}: AccountDeleteAlertProps) => {
+  const cancelRef = useRef(null);
+
+  return (
+    <AlertDialog
+      returnFocusOnClose={false}
+      leastDestructiveRef={cancelRef}
+      onClose={onClose}
+      isOpen={isOpen}
+    >
+      <AlertDialogOverlay>
+        <AlertDialogContent>
+          <AlertDialogHeader>Delete account</AlertDialogHeader>
+          <AlertDialogCloseButton />
+
+          <AlertDialogBody>
+            Your account will be permanently removed and cannot be recovered.
+          </AlertDialogBody>
+
+          <AlertDialogFooter>
+            <ButtonGroup>
+              <Button ref={cancelRef} onClick={onClose}>
+                Cancel
+              </Button>
+
+              <Button colorScheme="red" onClick={onConfirm}>
+                Delete account
+              </Button>
+            </ButtonGroup>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialogOverlay>
+    </AlertDialog>
   );
 };
