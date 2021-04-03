@@ -55,7 +55,6 @@ export const CropperModal: FC<Props> = ({
           <Box position="relative" minH={350}>
             <Cropper
               aspect={1}
-              cropShape="round"
               image={imageUrl}
               crop={crop}
               onCropChange={setCrop}
