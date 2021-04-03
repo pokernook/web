@@ -2,7 +2,6 @@ import { Flex } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { FC } from "react";
 
-// TODO: Display loading for a minimum amount of time
 export const Loading: FC = () => (
   <Flex alignItems="center" justifyContent="center" h="100vh" w="100vw">
     <motion.img

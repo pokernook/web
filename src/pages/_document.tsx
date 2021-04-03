@@ -7,7 +7,6 @@ import {
   NextScript,
 } from "next/document";
 
-// TODO: Avoid flash of incorrect color mode
 class Document extends NextDocument {
   render(): JSX.Element {
     return (
