@@ -5,6 +5,7 @@ import {
   FormLabel,
   Heading,
   HStack,
+  Icon,
   Input,
   Stack,
   Tab,
@@ -15,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
+import { FiSend } from "react-icons/fi";
 
 import { DashboardLayout } from "../components/DashboardLayout";
 import {
@@ -107,8 +109,13 @@ const AddFriend = () => {
             placeholder="Enter a Username#0000"
           />
 
-          <Button colorScheme="blue" w="xs" type="submit">
-            Add friend
+          <Button
+            colorScheme="blue"
+            w="xs"
+            type="submit"
+            rightIcon={<Icon as={FiSend} />}
+          >
+            Send request
           </Button>
         </HStack>
       </FormControl>

@@ -1,7 +1,7 @@
-import { SettingsIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   Button,
+  Icon,
   Input,
   Menu,
   MenuButton,
@@ -13,6 +13,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { FC } from "react";
+import { FiSettings } from "react-icons/fi";
 
 import { useLogOutMutation, useStatusClearMutation } from "../graphql";
 import { useAvatarSrc } from "../hooks/use-avatar-src";
@@ -90,7 +91,7 @@ export const UserNavMenu: FC = () => {
 
           <MenuItem onClick={onProfileOpen}>Edit profile</MenuItem>
           <MenuItem>View profile</MenuItem>
-          <MenuItem onClick={onSettingsOpen} icon={<SettingsIcon />}>
+          <MenuItem onClick={onSettingsOpen} icon={<Icon as={FiSettings} />}>
             Settings
           </MenuItem>
 

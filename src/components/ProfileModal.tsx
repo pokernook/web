@@ -1,4 +1,3 @@
-import { AddIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   Box,
@@ -7,6 +6,7 @@ import {
   FormControl,
   FormLabel,
   Grid,
+  Icon,
   Input,
   Modal,
   ModalBody,
@@ -20,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { ChangeEvent, FC, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { FiPlus } from "react-icons/fi";
 
 import { useUpdateUsernameMutation } from "../graphql";
 import { useAvatarSrc } from "../hooks/use-avatar-src";
@@ -95,7 +96,7 @@ export const ProfileModal: FC<Props> = ({ onClose, ...props }: Props) => {
                   isFullWidth
                   onClick={openImageUpload}
                   variant="ghost"
-                  leftIcon={<AddIcon />}
+                  leftIcon={<Icon as={FiPlus} />}
                 >
                   Upload an image
                 </Button>
