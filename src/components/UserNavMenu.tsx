@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Button,
   Icon,
   Input,
@@ -18,6 +17,7 @@ import { FiSettings } from "react-icons/fi";
 import { useLogOutMutation, useStatusClearMutation } from "../graphql";
 import { useAvatarSrc } from "../hooks/use-avatar-src";
 import { useUser } from "../hooks/use-user";
+import { Avatar } from "./Avatar";
 import { ProfileModal } from "./ProfileModal";
 import { SettingsModal } from "./SettingsModal";
 import { StatusModal } from "./StatusModal";
@@ -58,11 +58,11 @@ export const UserNavMenu: FC = () => {
 
       <Menu isLazy>
         <MenuButton>
-          <Avatar showBorder src={avatarSrc} size="sm" bg="black" />
+          <Avatar src={avatarSrc} boxSize={8} />
         </MenuButton>
         <MenuList>
           <MenuItem>
-            <Avatar src={avatarSrc} size="md" mr={2} bg="black" />
+            <Avatar src={avatarSrc} boxSize={16} mr={2} />
             <Text fontWeight={600}>{user?.username}</Text>
             <Text fontWeight={600} color="gray.500">
               {user?.discriminator}

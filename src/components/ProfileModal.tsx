@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Button,
   ButtonGroup,
@@ -25,6 +24,7 @@ import { FiPlus } from "react-icons/fi";
 import { useUpdateUsernameMutation } from "../graphql";
 import { useAvatarSrc } from "../hooks/use-avatar-src";
 import { useUser } from "../hooks/use-user";
+import { Avatar } from "./Avatar";
 import { CropperModal } from "./CropperModal";
 
 type Props = Omit<ModalProps, "children">;
@@ -88,8 +88,7 @@ export const ProfileModal: FC<Props> = ({ onClose, ...props }: Props) => {
                 <FormLabel>Profile photo</FormLabel>
                 <Avatar
                   src={croppedImageUrl || avatarSrc}
-                  size="full"
-                  bg="black"
+                  boxSize={48}
                   mb={3}
                 />
                 <Button

@@ -1,19 +1,12 @@
-import {
-  Avatar,
-  Box,
-  Flex,
-  HStack,
-  Icon,
-  IconButton,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Flex, HStack, Icon, IconButton, Text } from "@chakra-ui/react";
 import { formatDistanceToNow } from "date-fns";
 import { FC, ReactNode } from "react";
 import { FiCheck, FiMoreVertical, FiX } from "react-icons/fi";
 
-import { Card } from "../components/Card";
 import { FriendRequestFieldsFragment, UserFieldsFragment } from "../graphql";
 import { useAvatarSrc } from "../hooks/use-avatar-src";
+import { Avatar } from "./Avatar";
+import { Card } from "./Card";
 
 type FriendCard = {
   children: ReactNode;
@@ -31,7 +24,7 @@ type FriendProps = {
 
 export const Friend: FC<FriendProps> = ({ friend }: FriendProps) => (
   <FriendCard>
-    <Avatar src={useAvatarSrc(friend)} size="lg" bg="black" showBorder mr={2} />
+    <Avatar src={useAvatarSrc(friend)} boxSize={14} mr={2} />
     <Box>
       <Flex>
         <Text fontWeight={600}>{friend.username}</Text>
@@ -71,13 +64,7 @@ export const FriendRequestSent: FC<SentProps> = ({
 
   return (
     <FriendCard>
-      <Avatar
-        src={useAvatarSrc(friendRequest.to)}
-        size="lg"
-        bg="black"
-        showBorder
-        mr={2}
-      />
+      <Avatar src={useAvatarSrc(friendRequest.to)} boxSize={14} mr={2} />
       <Box>
         <Flex>
           <Text fontWeight={600}>{friendRequest.to.username}</Text>
@@ -94,7 +81,7 @@ export const FriendRequestSent: FC<SentProps> = ({
       </Box>
 
       <HStack justifyContent="flex-end" flex={1}>
-        <Text>Sent {sentAt}</Text>
+        <Text fontSize="sm">Sent {sentAt}</Text>
         <IconButton
           aria-label="Cancel friend request"
           icon={<Icon as={FiX} />}
@@ -122,13 +109,7 @@ export const FriendRequestReceived: FC<ReceivedProps> = ({
 
   return (
     <FriendCard>
-      <Avatar
-        src={useAvatarSrc(friendRequest.from)}
-        size="lg"
-        bg="black"
-        showBorder
-        mr={2}
-      />
+      <Avatar src={useAvatarSrc(friendRequest.from)} boxSize={14} mr={2} />
       <Box>
         <Flex>
           <Text fontWeight={600}>{friendRequest.from.username}</Text>
@@ -146,7 +127,7 @@ export const FriendRequestReceived: FC<ReceivedProps> = ({
       </Box>
 
       <HStack justifyContent="flex-end" flex={1}>
-        <Text>Received {receivedAt}</Text>
+        <Text fontSize="sm">Received {receivedAt}</Text>
         <IconButton
           aria-label="Accept friend request"
           icon={<Icon as={FiCheck} />}
