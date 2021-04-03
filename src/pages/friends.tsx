@@ -33,6 +33,7 @@ import {
 } from "../graphql";
 import { parseUserTag } from "../utils/parse-user-tag";
 
+// TODO: Improve the styling of the tabs
 const Friends: FC = () => (
   <DashboardLayout>
     <Box w="4xl" pt={10}>
