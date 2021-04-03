@@ -1,86 +1,53 @@
-/** @jsxImportSource theme-ui */
-import { FC } from "react";
 import {
-  MemoryRouter,
-  NavLink,
-  NavLinkProps,
-  Redirect,
-  Route,
-} from "react-router-dom";
-import { Box, Divider, Grid } from "theme-ui";
-
-import { AccountSettings } from "./AccountSettings";
-import {
-  ModalCard,
-  ModalClose,
+  Divider,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalHeader,
-  ModalPortal,
-} from "./Modal";
+  ModalOverlay,
+  ModalProps,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+} from "@chakra-ui/react";
+import { FC } from "react";
+
+import { AccountSettings } from "./AccountSettings";
 import { ThemeSettings } from "./ThemeSettings";
 
-type Props = {
-  onClose: () => void;
-};
+type Props = Omit<ModalProps, "children">;
 
-export const SettingsModal: FC<Props> = ({ onClose }: Props) => {
+export const SettingsModal: FC<Props> = ({ ...props }: Props) => {
   return (
-    <ModalPortal onClose={onClose} hasDimmedBackground>
-      <ModalCard>
-        <ModalClose onClose={onClose} />
+    <Modal size="2xl" scrollBehavior="inside" {...props}>
+      <ModalOverlay />
+      <ModalContent>
         <ModalHeader>Settings</ModalHeader>
-
+        <ModalCloseButton />
         <Divider />
 
-        <MemoryRouter>
-          <ModalContent>
-            <Grid
-              gap={3}
-              columns={[2, "2fr 5fr"]}
-              sx={{ height: 450, width: 650, ml: 3 }}
-            >
-              <Box sx={{ my: 2 }}>
-                <SettingsNav />
-              </Box>
+        <ModalBody h={450} roundedBottom="md">
+          <Tabs isLazy orientation="vertical">
+            <TabList position="fixed">
+              <Tab>Account</Tab>
+              <Tab>Theme</Tab>
+            </TabList>
 
-              <Box sx={{ overflow: "auto", py: 3, pr: 4 }}>
-                <SettingsRoutes />
-              </Box>
-            </Grid>
-          </ModalContent>
-        </MemoryRouter>
-      </ModalCard>
-    </ModalPortal>
+            <TabPanels ml="32">
+              <TabPanel>
+                <AccountSettings />
+              </TabPanel>
+
+              <TabPanel>
+                <ThemeSettings />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   );
 };
-
-const settingsNavRoutes: NavLinkProps[] = [
-  { to: "/settings/account", exact: true, children: "Account" },
-  { to: "/settings/theme", exact: true, children: "Theme" },
-];
-
-const SettingsNav = () => (
-  <>
-    {settingsNavRoutes.map((props, idx) => (
-      <Box key={idx} my={1}>
-        <NavLink {...props} sx={{ variant: "links.nav" }} />
-      </Box>
-    ))}
-  </>
-);
-
-const SettingsRoutes = () => (
-  <>
-    <Route exact path="/settings/account">
-      <AccountSettings />
-    </Route>
-
-    <Route exact path="/settings/theme">
-      <ThemeSettings />
-    </Route>
-
-    <Route>
-      <Redirect to="/settings/account" />
-    </Route>
-  </>
-);

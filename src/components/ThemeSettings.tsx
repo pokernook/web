@@ -1,26 +1,34 @@
-import { ChangeEvent, FC } from "react";
-import { Box, Heading, Select, Text, useColorMode } from "theme-ui";
+import {
+  FormLabel,
+  Heading,
+  Radio,
+  RadioGroup,
+  Stack,
+  useColorMode,
+} from "@chakra-ui/react";
+import { FC } from "react";
 
 export const ThemeSettings: FC = () => {
-  const [colorMode, setColorMode] = useColorMode();
-
-  const handleModeChange = (e: ChangeEvent<HTMLSelectElement>) =>
-    setColorMode(e.target.value);
+  const { colorMode, setColorMode } = useColorMode();
 
   return (
     <>
-      <Heading as="h3" mb={3}>
+      <Heading size="md" mb={3}>
         Theme
       </Heading>
 
-      <Box mb={3}>
-        <Text>Choose how PokerNook looks to you.</Text>
-      </Box>
+      <FormLabel>Choose how PokerNook looks to you.</FormLabel>
 
-      <Select defaultValue={colorMode} onChange={handleModeChange}>
-        <option value="dark">Dark</option>
-        <option value="light">Light</option>
-      </Select>
+      <RadioGroup
+        onChange={(e) => setColorMode(e)}
+        name="radio-theme"
+        defaultValue={colorMode}
+      >
+        <Stack>
+          <Radio value="dark">Dark</Radio>
+          <Radio value="light">Light</Radio>
+        </Stack>
+      </RadioGroup>
     </>
   );
 };

@@ -1,21 +1,24 @@
-import { FC, useState } from "react";
-import Cropper from "react-easy-crop";
-import { Area } from "react-easy-crop/types";
-import { Box, Button } from "theme-ui";
-
-import { getCroppedImageUrl } from "../utils/image";
 import {
-  ModalCard,
-  ModalClose,
+  Box,
+  Button,
+  ButtonGroup,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
-  ModalPortal,
-} from "./Modal";
+  ModalOverlay,
+  ModalProps,
+} from "@chakra-ui/react";
+import { FC, useState } from "react";
+import Cropper from "react-easy-crop";
+import { Area } from "react-easy-crop/types";
 
-type Props = {
+import { getCroppedImageUrl } from "../utils/image";
+
+type Props = Omit<ModalProps, "children"> & {
   imageUrl: string;
-  onClose: () => void;
   onSave: (url: string) => void;
 };
 
@@ -23,6 +26,7 @@ export const CropperModal: FC<Props> = ({
   imageUrl,
   onClose,
   onSave,
+  ...props
 }: Props) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -41,15 +45,17 @@ export const CropperModal: FC<Props> = ({
   };
 
   return (
-    <ModalPortal onClose={onClose}>
-      <ModalCard>
-        <ModalClose onClose={onClose} />
+    <Modal size="xl" onClose={onClose} {...props}>
+      <ModalOverlay />
+      <ModalContent>
         <ModalHeader>Crop your photo</ModalHeader>
+        <ModalCloseButton />
 
-        <ModalContent>
-          <Box sx={{ position: "relative", minHeight: 350 }}>
+        <ModalBody>
+          <Box position="relative" minH={350}>
             <Cropper
               aspect={1}
+              cropShape="round"
               image={imageUrl}
               crop={crop}
               onCropChange={setCrop}
@@ -58,18 +64,17 @@ export const CropperModal: FC<Props> = ({
               onZoomChange={setZoom}
             />
           </Box>
-        </ModalContent>
+        </ModalBody>
 
         <ModalFooter>
-          <Button variant="tertiary" onClick={onClose} mr={2}>
-            Cancel
-          </Button>
-
-          <Button variant="secondary" onClick={handleSaveCrop}>
-            Save
-          </Button>
+          <ButtonGroup>
+            <Button onClick={onClose}>Cancel</Button>
+            <Button colorScheme="blue" onClick={handleSaveCrop}>
+              Save
+            </Button>
+          </ButtonGroup>
         </ModalFooter>
-      </ModalCard>
-    </ModalPortal>
+      </ModalContent>
+    </Modal>
   );
 };

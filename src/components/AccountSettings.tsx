@@ -1,6 +1,17 @@
+import {
+  Box,
+  Button,
+  Divider,
+  Fade,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  Heading,
+  Input,
+  Link,
+} from "@chakra-ui/react";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
-import { Box, Button, Divider, Field, Heading, Link, Text } from "theme-ui";
 
 import {
   MutationUserUpdateEmailArgs,
@@ -8,9 +19,8 @@ import {
   useDeleteAccountMutation,
   useUpdateEmailMutation,
   useUpdatePasswordMutation,
-} from "../graphql/types";
+} from "../graphql";
 import { useUser } from "../hooks/use-user";
-import { FadeIn } from "./Animated";
 
 export const AccountSettings: FC = () => (
   <>
@@ -44,41 +54,36 @@ const UpdateEmail = () => {
   });
 
   return (
-    <form onSubmit={onSubmit}>
-      <Heading as="h3" mb={3}>
+    <Box as="form" onSubmit={onSubmit}>
+      <Heading size="md" mb={3}>
         Email
       </Heading>
 
-      <Field
-        label="Email address"
-        type="email"
-        {...register("newEmail", { required: true })}
-      />
+      <FormControl mb={2}>
+        <FormLabel>Email address</FormLabel>
+        <Input type="email" {...register("newEmail", { required: true })} />
+        <FormHelperText>
+          {!user?.emailVerified && (
+            <>
+              Not verified; check your inbox, or{" "}
+              <Link>resend the verification email</Link>.
+            </>
+          )}
+        </FormHelperText>
+      </FormControl>
 
-      <Box mt={1} mb={3} ml={1}>
-        {!user?.emailVerified && (
-          <Text variant="help">
-            Not verified; check your inbox, or{" "}
-            <Link>resend the verification email</Link>.
-          </Text>
-        )}
-      </Box>
-
-      {isDirty && (
-        <FadeIn>
-          <Field
-            label="Password"
+      <Fade in={isDirty} unmountOnExit>
+        <FormControl mb={3}>
+          <FormLabel>Password</FormLabel>
+          <Input
             type="password"
             {...register("password", { required: true })}
-            mb={3}
           />
+        </FormControl>
 
-          <Button variant="tertiary" type="submit">
-            Save email
-          </Button>
-        </FadeIn>
-      )}
-    </form>
+        <Button type="submit">Save email</Button>
+      </Fade>
+    </Box>
   );
 };
 
@@ -98,29 +103,29 @@ const UpdatePassword = () => {
   });
 
   return (
-    <form onSubmit={onSubmit}>
-      <Heading as="h3" mb={3}>
+    <Box as="form" onSubmit={onSubmit}>
+      <Heading size="md" mb={3}>
         Update password
       </Heading>
 
-      <Field
-        label="Current password"
-        type="password"
-        {...register("currentPassword", { required: true })}
-        mb={3}
-      />
+      <FormControl mb={2}>
+        <FormLabel>Current password</FormLabel>
+        <Input
+          type="password"
+          {...register("currentPassword", { required: true })}
+        />
+      </FormControl>
 
-      <Field
-        label="New password"
-        type="password"
-        {...register("newPassword", { required: true })}
-        mb={3}
-      />
+      <FormControl mb={3}>
+        <FormLabel>New password</FormLabel>
+        <Input
+          type="password"
+          {...register("newPassword", { required: true })}
+        />
+      </FormControl>
 
-      <Button variant="tertiary" type="submit">
-        Update password
-      </Button>
-    </form>
+      <Button type="submit">Update password</Button>
+    </Box>
   );
 };
 
@@ -131,14 +136,12 @@ const DeleteAccount = () => {
 
   return (
     <>
-      <Heading as="h3" mb={3}>
+      <Heading size="md" mb={3}>
         Delete account
       </Heading>
-      <Box mb={3}>
-        <Text>Careful, there&apos;s no coming back.</Text>
-      </Box>
+      <FormLabel mb={2}>Careful, there&apos;s no coming back.</FormLabel>
 
-      <Button variant="danger" onClick={handleDeleteAccount}>
+      <Button colorScheme="red" onClick={handleDeleteAccount}>
         Delete account
       </Button>
     </>

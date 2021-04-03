@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import { useMeQuery, UserFieldsFragment } from "../graphql/types";
+import { useMeQuery, UserFieldsFragment } from "../graphql";
 
 type UseUserArgs = {
   hrefIfAbsent?: string;
