@@ -1,7 +1,7 @@
+import { CheckIcon, ChevronDownIcon, CloseIcon } from "@chakra-ui/icons";
 import { Avatar, Box, Flex, Heading, IconButton, Text } from "@chakra-ui/react";
 import { formatDistanceToNow } from "date-fns";
 import { FC } from "react";
-import { FiCheck, FiMoreVertical, FiX } from "react-icons/fi";
 
 import { Card } from "../components/Card";
 import { FriendRequestFieldsFragment, UserFieldsFragment } from "../graphql";
@@ -26,7 +26,7 @@ export const Friend: FC<FriendProps> = ({ friend }: FriendProps) => (
       </Box>
 
       <Flex alignItems="center" justifyContent="flex-end" flex={1}>
-        <IconButton aria-label="More options" icon={<FiMoreVertical />} />
+        <IconButton aria-label="More options" icon={<ChevronDownIcon />} />
       </Flex>
     </Card>
   </>
@@ -68,7 +68,7 @@ export const FriendRequestSent: FC<SentProps> = ({
           <Text mr={3}>Sent {sentAt}</Text>
           <IconButton
             aria-label="Cancel friend request"
-            icon={<FiX />}
+            icon={<CloseIcon />}
             onClick={onCancel}
           />
         </Flex>
@@ -115,13 +115,13 @@ export const FriendRequestReceived: FC<ReceivedProps> = ({
           <Text mr={3}>Received {receivedAt}</Text>
           <IconButton
             aria-label="Accept friend request"
-            icon={<FiCheck />}
+            icon={<CheckIcon />}
             mr={2}
             onClick={onAccept}
           />
           <IconButton
             aria-label="Ignore friend request"
-            icon={<FiX />}
+            icon={<CloseIcon />}
             onClick={onReject}
           />
         </Flex>
