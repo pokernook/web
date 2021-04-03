@@ -1,35 +1,48 @@
 import { CheckIcon, ChevronDownIcon, CloseIcon } from "@chakra-ui/icons";
-import { Avatar, Box, Flex, Heading, IconButton, Text } from "@chakra-ui/react";
+import { Avatar, Box, Flex, HStack, IconButton, Text } from "@chakra-ui/react";
 import { formatDistanceToNow } from "date-fns";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 import { Card } from "../components/Card";
 import { FriendRequestFieldsFragment, UserFieldsFragment } from "../graphql";
 import { useAvatarSrc } from "../hooks/use-avatar-src";
+
+type FriendCard = {
+  children: ReactNode;
+};
+
+const FriendCard: FC<FriendCard> = ({ children }: FriendCard) => (
+  <Card display="flex" alignItems="center" _hover={{ bg: "gray.900" }}>
+    {children}
+  </Card>
+);
 
 type FriendProps = {
   friend: UserFieldsFragment;
 };
 
 export const Friend: FC<FriendProps> = ({ friend }: FriendProps) => (
-  <>
-    <Card>
-      <Avatar src={useAvatarSrc(friend)} size="md" mr={3} />
-      <Box>
-        <Flex mb={2}>
-          <Heading>{friend.username}</Heading>
-          <Heading color="GrayText">{friend.discriminator}</Heading>
-        </Flex>
-
-        {friend.status &&
-          `${friend.status.emoji || ""} ${friend.status.message || ""}`}
-      </Box>
-
-      <Flex alignItems="center" justifyContent="flex-end" flex={1}>
-        <IconButton aria-label="More options" icon={<ChevronDownIcon />} />
+  <FriendCard>
+    <Avatar src={useAvatarSrc(friend)} size="lg" bg="black" showBorder mr={2} />
+    <Box>
+      <Flex>
+        <Text fontWeight={600}>{friend.username}</Text>
+        <Text fontWeight={600} color="gray.500">
+          {friend.discriminator}
+        </Text>
       </Flex>
-    </Card>
-  </>
+
+      {friend.status && (
+        <Text>
+          {friend.status.emoji} {friend.status.message}
+        </Text>
+      )}
+    </Box>
+
+    <Flex justifyContent="flex-end" flex={1}>
+      <IconButton aria-label="More options" icon={<ChevronDownIcon />} />
+    </Flex>
+  </FriendCard>
 );
 
 type SentProps = {
@@ -46,34 +59,38 @@ export const FriendRequestSent: FC<SentProps> = ({
   });
 
   return (
-    <>
-      <Card>
-        <Avatar src={useAvatarSrc(friendRequest.to)} size="md" mr={3} />
-
-        <Box>
-          <Flex mb={2}>
-            <Heading>{friendRequest.to?.username}</Heading>
-            <Heading color="GrayText">
-              {friendRequest.to?.discriminator}
-            </Heading>
-          </Flex>
-
-          {friendRequest.to?.status &&
-            `${friendRequest.to.status.emoji || ""} ${
-              friendRequest.to.status.message || ""
-            }`}
-        </Box>
-
-        <Flex alignItems="center" justifyContent="flex-end" flex={1}>
-          <Text mr={3}>Sent {sentAt}</Text>
-          <IconButton
-            aria-label="Cancel friend request"
-            icon={<CloseIcon />}
-            onClick={onCancel}
-          />
+    <FriendCard>
+      <Avatar
+        src={useAvatarSrc(friendRequest.to)}
+        size="lg"
+        bg="black"
+        showBorder
+        mr={2}
+      />
+      <Box>
+        <Flex>
+          <Text fontWeight={600}>{friendRequest.to.username}</Text>
+          <Text fontWeight={600} color="gray.500">
+            {friendRequest.to.discriminator}
+          </Text>
         </Flex>
-      </Card>
-    </>
+
+        {friendRequest.to.status && (
+          <Text>
+            {friendRequest.to.status.emoji} {friendRequest.to.status.message}
+          </Text>
+        )}
+      </Box>
+
+      <HStack justifyContent="flex-end" flex={1}>
+        <Text>Sent {sentAt}</Text>
+        <IconButton
+          aria-label="Cancel friend request"
+          icon={<CloseIcon />}
+          onClick={onCancel}
+        />
+      </HStack>
+    </FriendCard>
   );
 };
 
@@ -93,39 +110,43 @@ export const FriendRequestReceived: FC<ReceivedProps> = ({
   });
 
   return (
-    <>
-      <Card>
-        <Avatar src={useAvatarSrc(friendRequest.from)} size="md" mr={3} />
-
-        <Box>
-          <Flex mb={2}>
-            <Heading>{friendRequest.from?.username}</Heading>
-            <Heading color="GrayText">
-              {friendRequest.from?.discriminator}
-            </Heading>
-          </Flex>
-
-          {friendRequest.from?.status &&
-            `${friendRequest.from.status.emoji || ""} ${
-              friendRequest.from.status.message || ""
-            }`}
-        </Box>
-
-        <Flex alignItems="center" justifyContent="flex-end" flex={1}>
-          <Text mr={3}>Received {receivedAt}</Text>
-          <IconButton
-            aria-label="Accept friend request"
-            icon={<CheckIcon />}
-            mr={2}
-            onClick={onAccept}
-          />
-          <IconButton
-            aria-label="Ignore friend request"
-            icon={<CloseIcon />}
-            onClick={onReject}
-          />
+    <FriendCard>
+      <Avatar
+        src={useAvatarSrc(friendRequest.from)}
+        size="lg"
+        bg="black"
+        showBorder
+        mr={2}
+      />
+      <Box>
+        <Flex>
+          <Text fontWeight={600}>{friendRequest.from.username}</Text>
+          <Text fontWeight={600} color="gray.500">
+            {friendRequest.from.discriminator}
+          </Text>
         </Flex>
-      </Card>
-    </>
+
+        {friendRequest.from.status && (
+          <Text>
+            {friendRequest.from.status.emoji}{" "}
+            {friendRequest.from.status.message}
+          </Text>
+        )}
+      </Box>
+
+      <HStack justifyContent="flex-end" flex={1}>
+        <Text>Received {receivedAt}</Text>
+        <IconButton
+          aria-label="Accept friend request"
+          icon={<CheckIcon />}
+          onClick={onAccept}
+        />
+        <IconButton
+          aria-label="Ignore friend request"
+          icon={<CloseIcon />}
+          onClick={onReject}
+        />
+      </HStack>
+    </FriendCard>
   );
 };
