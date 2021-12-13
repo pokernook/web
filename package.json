@@ -15,7 +15,7 @@
     "start": "next start -p 8080"
   },
   "dependencies": {
-    "@chakra-ui/react": "^1.4.2",
+    "@chakra-ui/react": "^1.7.3",
     "@chakra-ui/theme-tools": "^1.1.2",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
